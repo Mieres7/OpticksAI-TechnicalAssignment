@@ -1,15 +1,18 @@
-// config/db.js
 const { Sequelize } = require("sequelize");
 
-const sequelize = new Sequelize(
-  process.env.DB_NAME,
-  process.env.DB_USER,
-  process.env.DB_PASSWORD,
-  {
-    host: process.env.DB_HOST,
-    dialect: "postgres",
-    logging: false,
-  }
-);
+const sequelize = new Sequelize("opticksai_db", "postgres", "1234", {
+  host: "postgres",
+  dialect: "postgres",
+  logging: false,
+});
+
+sequelize
+  .sync()
+  .then(() => {
+    console.log("Base de datos sincronizada");
+  })
+  .catch((error) => {
+    console.error("Error al sincronizar la base de datos:", error);
+  });
 
 module.exports = sequelize;

@@ -1,47 +1,40 @@
 version: "3.8"
 
 services:
-  db:
-    image: postgres:14
-    container_name: tienda_db
+  # Servicio de PostgreSQL
+  postgres:
+    image: postgres:latest
+    container_name: postgres-container
     environment:
-      POSTGRES_USER: usuario
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: tienda_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: opticksai_db
+    ports:
+      - "5432:5432"
     volumes:
-      - ./data/db:/var/lib/postgresql/data # Volumen para persistir los datos
-      - ./migrations/init.sql:/docker-entrypoint-initdb.d/init.sql # Crear tablas
-      - ./migrations/seed.sql:/docker-entrypoint-initdb.d/seed.sql # Insertar datos
-    ports:
-      - "5432:5432" # Puerto de PostgreSQL
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql # Carga el archivo init.sql para crear las tablas y los datos
     networks:
-      - tienda_network
+      - backend-network
+    restart: always
 
+  # Servicio del Backend con Express.js
   backend:
-    build: ./backend
-    container_name: tienda_backend
+    build: ./backend # Asume que tienes un Dockerfile en la carpeta backend
+    container_name: backend-container
     environment:
-      DB_HOST: db
-      DB_USER: usuario
-      DB_PASSWORD: password
-      DB_NAME: tienda_db
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: opticksai_db
+      DB_USER: postgres
+      DB_PASSWORD: 1234
     ports:
-      - "5000:5000"
+      - "5000:5000" # Puerto para el backend
     depends_on:
-      - db
+      - postgres
     networks:
-      - tienda_network
-
-  frontend:
-    build: ./frontend
-    container_name: tienda_frontend
-    ports:
-      - "3000:3000"
-    depends_on:
-      - backend
-    networks:
-      - tienda_network
+      - backend-network
+    restart: always
 
 networks:
-  tienda_network:
+  backend-network:
     driver: bridge

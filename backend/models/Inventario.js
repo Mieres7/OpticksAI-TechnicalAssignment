@@ -1,10 +1,11 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/db");
+const Producto = require("../models/Producto");
 
 const Inventario = sequelize.define(
   "Inventario",
   {
-    id: {
+    id_inventario: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
@@ -40,11 +41,10 @@ const Inventario = sequelize.define(
   }
 );
 
-// Relación: Un Inventario pertenece a un Producto
 Inventario.associate = function (models) {
   Inventario.belongsTo(models.Producto, {
     foreignKey: "id_producto",
-    as: "producto", // Alias para acceder a la relación
+    as: "producto",
   });
 };
 

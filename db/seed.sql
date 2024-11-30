@@ -8,8 +8,8 @@ INSERT INTO Productos (nombre, descripcion, categoria, precio_unitario) VALUES
 ('Monitor', 'Monitor LED 24"', 'Electrónica', 250.00),
 ('Teclado', 'Teclado mecánico', 'Accesorios', 100.00);
 
--- Insertar ventas simuladas para 6 meses
--- Enero 2024
+Insertar ventas simuladas para 6 meses
+Enero 2024
 INSERT INTO Ventas (id_producto, cantidad_vendida, precio_venta, fecha_venta, total_venta, metodo_pago) VALUES
 (1, 5, 1200.00, '2024-01-05', 6000.00, 'Tarjeta de Crédito'),
 (2, 10, 800.00, '2024-01-10', 8000.00, 'Transferencia'),

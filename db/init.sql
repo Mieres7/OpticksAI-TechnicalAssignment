@@ -12,8 +12,7 @@ CREATE TABLE INVENTARIO (
     id_producto INTEGER REFERENCES Productos(id_producto),
     cantidad INTEGER NOT NULL,
     fecha_registro DATE NOT NULL,
-    ubicacion VARCHAR(100),
-    estado VARCH
+    ubicacion VARCHAR(100)
 );
 
 CREATE TABLE VENTAS (
@@ -25,3 +24,11 @@ CREATE TABLE VENTAS (
     total_venta DECIMAL(10,2) NOT NULL,
     metodo_pago VARCHAR(50)
 );
+
+
+INSERT INTO Productos (nombre, descripcion, categoria, precio_unitario) VALUES
+('Laptop', 'Computadora portátil', 'Electrónica', 1200.00),
+('Smartphone', 'Teléfono inteligente', 'Electrónica', 800.00),
+('Auriculares', 'Auriculares inalámbricos', 'Accesorios', 150.00),
+('Monitor', 'Monitor LED 24"', 'Electrónica', 250.00),
+('Teclado', 'Teclado mecánico', 'Accesorios', 100.00);
