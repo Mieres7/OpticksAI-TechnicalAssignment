@@ -87,6 +87,36 @@ const ventaController = {
       res.status(500).json({ message: error.message });
     }
   },
+
+  getVentasPorMes: async (req, res) => {
+    try {
+      const ventasPorMes = await ventaService.getVentasPorMes();
+      res.json(ventasPorMes);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  },
+
+  getVentasPorProductoPorMes: async (req, res) => {
+    const { id } = req.params; // Obtiene el id_producto desde los parámetros de la URL
+    try {
+      // Llamamos al servicio para obtener las ventas agrupadas por mes
+      const ventasPorMes = await ventaService.getVentasPorProductoPorMes(id);
+
+      // Si no hay ventas, respondemos con un mensaje adecuado
+      if (ventasPorMes.length === 0) {
+        return res
+          .status(404)
+          .json({ message: "No se encontraron ventas para este producto." });
+      }
+
+      // Devolvemos las ventas agrupadas por mes
+      res.json(ventasPorMes);
+    } catch (error) {
+      // En caso de error, respondemos con el mensaje de error
+      res.status(500).json({ error: error.message });
+    }
+  },
 };
 
 module.exports = ventaController;

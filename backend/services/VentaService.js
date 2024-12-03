@@ -1,3 +1,4 @@
+const { Sequelize } = require("sequelize");
 const Venta = require("../models/Venta");
 
 const VentaService = {
@@ -69,6 +70,50 @@ const VentaService = {
       return { message: "Venta eliminada exitosamente" };
     } catch (error) {
       throw new Error("Error al eliminar la venta");
+    }
+  },
+
+  getVentasPorMes: async () => {
+    try {
+      const ventasPorMes = await Venta.sequelize.query(
+        `SELECT 
+            TO_CHAR(fecha_venta, 'YYYY-MM') AS mes, 
+            COUNT(*) AS numero_de_ventas
+         FROM ventas
+         GROUP BY TO_CHAR(fecha_venta, 'YYYY-MM')
+         ORDER BY mes;`,
+        {
+          type: Sequelize.QueryTypes.SELECT,
+        }
+      );
+      return ventasPorMes;
+    } catch (error) {
+      throw new Error("Error al obtener ventas por mes: " + error.message);
+    }
+  },
+
+  getVentasPorProductoPorMes: async (idProducto) => {
+    try {
+      const ventasPorMes = await Venta.sequelize.query(
+        `
+        SELECT 
+          TO_CHAR(fecha_venta, 'YYYY-MM') AS mes, 
+          SUM(cantidad_vendida) AS cantidad_vendida
+        FROM ventas
+        WHERE id_producto = :idProducto
+        GROUP BY TO_CHAR(fecha_venta, 'YYYY-MM')
+        ORDER BY mes;
+        `,
+        {
+          replacements: { idProducto }, // Inyecta el idProducto en la consulta
+          type: Sequelize.QueryTypes.SELECT, // Especificamos que es una consulta de selección
+        }
+      );
+      return ventasPorMes; // Devuelve el listado de ventas agrupadas por mes
+    } catch (error) {
+      throw new Error(
+        "Error al obtener las ventas por producto: " + error.message
+      );
     }
   },
 };
