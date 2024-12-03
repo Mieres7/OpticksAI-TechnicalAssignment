@@ -16,7 +16,6 @@ services:
     networks:
       - backend-network
     restart: always
-    # Delay para asegurar que PostgreSQL esté listo antes de iniciar el backend
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres -d opticksai_db"]
       interval: 10s
@@ -38,6 +37,16 @@ services:
     depends_on:
       postgres:
         condition: service_healthy # Esperar a que PostgreSQL esté saludable
+    networks:
+      - backend-network
+    restart: always
+
+  # Servicio del Frontend con Next.js
+  frontend:
+    build: ./frontend # Asume que tienes un Dockerfile en la carpeta frontend
+    container_name: frontend-container
+    ports:
+      - "3000:3000" # Puerto para el frontend
     networks:
       - backend-network
     restart: always

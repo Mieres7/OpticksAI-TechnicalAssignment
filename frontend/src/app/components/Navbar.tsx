@@ -1,10 +1,7 @@
-import { useState } from "react";
-import Link from "next/link";
 import {
   UserCircleIcon,
   EnvelopeIcon,
   BellIcon,
-  Bars3Icon,
 } from "@heroicons/react/24/outline";
 
 export default function Navbar() {

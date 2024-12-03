@@ -88,8 +88,6 @@ export default function Statistics() {
 
   return (
     <div className="flex flex-row w-auto h-screen fade-in">
-      {/* Primera fila: Gráficos de ventas e inventario en horizontal */}
-
       <div className="flex flex-col gap-3 w-auto">
         <label htmlFor="productoSelect" className="mr-1">
           Filtrar por producto:
@@ -109,12 +107,9 @@ export default function Statistics() {
       </div>
       <div className="flex flex-col w-full">
         <div className="flex flex-row w-full justify-center ">
-          {/* Selector de producto */}
-
-          {/* Gráfico de Ventas */}
           <div className="flex flex-col items-center w-1/2">
             <span className="text-xl mb-4">Flujo de Ventas</span>
-            <ResponsiveContainer width="90%" height={250}>
+            <ResponsiveContainer width="90%" height={300}>
               <LineChart data={ventas}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="mes" />
@@ -130,10 +125,9 @@ export default function Statistics() {
             </ResponsiveContainer>
           </div>
 
-          {/* Gráfico de Inventario */}
           <div className="flex flex-col items-center w-1/2">
             <span className="text-xl mb-4">Flujo de Inventario</span>
-            <ResponsiveContainer width="90%" height={250}>
+            <ResponsiveContainer width="90%" height={300}>
               <LineChart data={inventario}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="mes" />
@@ -150,14 +144,13 @@ export default function Statistics() {
           </div>
         </div>
 
-        {/* Segunda fila: Gráfico de preferencias de pago y productos más vendidos */}
         <div className="flex flex-row w-full justify-center">
           {/* Gráfico de Preferencias de Pago */}
           <div className="flex flex-col items-center w-1/2">
             <span className="text-xl mb-4">
               Preferencias de Pagos (Junio - Noviembre)
             </span>
-            <ResponsiveContainer width="90%" height={270}>
+            <ResponsiveContainer width="90%" height={300}>
               <BarChart data={payments}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="metodo_pago" />
@@ -169,7 +162,6 @@ export default function Statistics() {
             </ResponsiveContainer>
           </div>
 
-          {/* Gráfico de Top Productos */}
           <div className="topProd  flex flex-col items-center w-1/2">
             <span className="text-xl mb-4">Top Productos Más Vendidos</span>
             <ul className="space-y-4 w-full px-20 ">
@@ -179,7 +171,6 @@ export default function Statistics() {
                   className="flex items-center justify-between border-b py-5"
                 >
                   <div className="flex items-center space-x-3">
-                    {/* Mostrar el icono específico para cada producto */}
                     {getIcon(producto.nombre)}
                     <span className="font-medium text-lg">
                       {producto.nombre}
