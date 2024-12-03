@@ -24,7 +24,7 @@ services:
 
   # Servicio del Backend con Express.js
   backend:
-    build: ./backend # Asume que tienes un Dockerfile en la carpeta backend
+    image: mieres/opticksai-backend:latest # Usar la imagen subida a Docker Hub
     container_name: backend-container
     environment:
       DB_HOST: postgres
@@ -43,7 +43,7 @@ services:
 
   # Servicio del Frontend con Next.js
   frontend:
-    build: ./frontend # Asume que tienes un Dockerfile en la carpeta frontend
+    image: mieres/opticksai-frontend:latest # Usar la imagen subida a Docker Hub
     container_name: frontend-container
     ports:
       - "3000:3000" # Puerto para el frontend
