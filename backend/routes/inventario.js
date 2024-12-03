@@ -4,6 +4,10 @@ const InventarioController = require("../controllers/InventarioController");
 
 router.get("/", InventarioController.getAllInvenatarios);
 router.get("/:id", InventarioController.getInventario);
+router.get(
+  "/por-prod-mes/:id",
+  InventarioController.getInventarioPorProductoPorMes
+);
 
 router.post("/", InventarioController.createInventario);
 

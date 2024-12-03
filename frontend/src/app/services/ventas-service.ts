@@ -9,4 +9,17 @@ const getByProdMonth = (id: any) => {
   return httpClient.get(`/venta/por-prod-mes/${id}`);
 };
 
-export default { getAll, getByProdMonth };
+const getPaymentsPriorities = () => {
+  return httpClient.get("/venta/por-metodo-pago/1");
+};
+
+const getTopProductSold = () => {
+  return httpClient.get("/venta/top-productos/1");
+};
+
+export default {
+  getAll,
+  getByProdMonth,
+  getPaymentsPriorities,
+  getTopProductSold,
+};

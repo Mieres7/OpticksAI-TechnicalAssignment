@@ -9,7 +9,7 @@ export default function StatsLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="flex flex-col p-10 h-screen gap-10">
+    <div className="flex flex-col p-10 h-screen gap-5">
       <Navbar />
       {children}
     </div>

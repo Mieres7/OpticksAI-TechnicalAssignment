@@ -6,6 +6,8 @@ router.get("/", VentaController.getAllVentas);
 router.get("/:id", VentaController.getVenta);
 router.get("/por-mes", VentaController.getVentasPorMes);
 router.get("/por-prod-mes/:id", VentaController.getVentasPorProductoPorMes);
+router.get("/por-metodo-pago/:id", VentaController.getVentasPorMetodoPago);
+router.get("/top-productos/:id", VentaController.getTopProdcutosVendidos);
 
 router.post("/", VentaController.createVenta);
 

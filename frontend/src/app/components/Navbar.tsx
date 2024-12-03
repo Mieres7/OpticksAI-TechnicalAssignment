@@ -11,7 +11,6 @@ export default function Navbar() {
   return (
     <div className="relative flex items-center justify-between w-full text-black text-lg">
       <div className="flex gap-3">
-        <Bars3Icon className="w-8 " />
         <span className="text-3xl">Welcome .</span>
       </div>
 

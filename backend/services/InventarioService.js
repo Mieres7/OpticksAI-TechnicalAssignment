@@ -1,4 +1,5 @@
 const Inventario = require("../models/Inventario");
+const { Sequelize } = require("sequelize");
 
 const InventarioService = {
   getAllInventarios: async () => {
@@ -63,6 +64,31 @@ const InventarioService = {
       return { message: "Inventario eliminado exitosamente" };
     } catch (error) {
       throw new Error("Error al eliminar el inventario");
+    }
+  },
+
+  getInventarioPorProductoPorMes: async (idProducto) => {
+    try {
+      const inventarioPorMes = await Inventario.sequelize.query(
+        `
+        SELECT 
+          TO_CHAR(fecha_registro, 'YYYY-MM') AS mes, 
+          SUM(cantidad) AS cantidad_restante
+        FROM inventario
+        WHERE id_producto = :idProducto
+        GROUP BY TO_CHAR(fecha_registro, 'YYYY-MM')
+        ORDER BY mes;
+        `,
+        {
+          replacements: { idProducto }, // Asegúrate de que se pasa el valor correctamente
+          type: Sequelize.QueryTypes.SELECT,
+        }
+      );
+      return inventarioPorMes;
+    } catch (error) {
+      throw new Error(
+        "Error al obtener el inventario por producto: " + error.message
+      );
     }
   },
 };

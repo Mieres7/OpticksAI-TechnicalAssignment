@@ -69,6 +69,29 @@ const inventarioController = {
       res.status(500).json({ message: error.message });
     }
   },
+
+  getInventarioPorProductoPorMes: async (req, res) => {
+    const { id } = req.params; // Obtén el idProducto desde los parámetros de la URL
+
+    try {
+      // Llama al servicio para obtener las ventas por mes
+      const inventario = await inventarioService.getInventarioPorProductoPorMes(
+        id
+      );
+
+      if (inventario.length === 0) {
+        return res
+          .status(404)
+          .json({ message: "No se encontró inventario para este producto." });
+      }
+
+      // Devuelve el inventario en formato JSON
+      res.json(inventario);
+    } catch (error) {
+      // console.error("Error al obtener inventario:", error);
+      return res.status(500).json({ error: error.message });
+    }
+  },
 };
 
 module.exports = inventarioController;

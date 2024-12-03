@@ -117,6 +117,34 @@ const ventaController = {
       res.status(500).json({ error: error.message });
     }
   },
+
+  getVentasPorMetodoPago: async (req, res) => {
+    try {
+      const ventas = await ventaService.getVentasPorMetodoPago();
+
+      if (ventas.length === 0) {
+        return res.status(404).json({ message: "No se encontraron ventas." });
+      }
+
+      return res.status(200).json(ventas);
+    } catch (error) {
+      console.error("Error al obtener ventas por método de pago:", error);
+      return res
+        .status(500)
+        .json({ message: "Hubo un error al obtener las ventas." });
+    }
+  },
+
+  getTopProdcutosVendidos: async (req, res) => {
+    try {
+      const productos = await ventaService.getTopProdcutosVendidos();
+      return res.status(200).json(productos);
+    } catch (error) {
+      return res.status(500).json({
+        error: "Error al obtener los productos más vendidos: " + error.message,
+      });
+    }
+  },
 };
 
 module.exports = ventaController;

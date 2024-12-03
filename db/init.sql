@@ -37,20 +37,14 @@ INSERT INTO Productos (nombre, descripcion, categoria, precio_unitario) VALUES
 
 -- Inventario inicial (Junio)
 
--- Inventario inicial de 100 unidades para cada producto
-INSERT INTO Inventario (id_producto, cantidad, fecha_registro, ubicacion) VALUES
-(1, 100, '2024-06-01', 'Almacén 1'),  -- Laptop
-(2, 100, '2024-06-01', 'Almacén 2'),  -- Smartphone
-(3, 100, '2024-06-01', 'Almacén 1'),  -- Auriculares
-(4, 100, '2024-06-01', 'Almacén 3'),  -- Monitor
-(5, 100, '2024-06-01', 'Almacén 2');  -- Teclado
+
 
 -- Ventas de Junio
 
 INSERT INTO Ventas (id_producto, cantidad_vendida, precio_venta, fecha_venta, total_venta, metodo_pago) VALUES
 (1, 20, 1200.00, '2024-06-10', 24000.00, 'Tarjeta de Crédito'),  -- Laptop
 (2, 15, 800.00, '2024-06-12', 12000.00, 'Efectivo'),            -- Smartphone
-(3, 25, 150.00, '2024-06-15', 3750.00, 'Transferencia Bancaria'),-- Auriculares
+(3, 25, 150.00, '2024-06-15', 3750.00, 'Efectivo'),-- Auriculares
 (4, 10, 250.00, '2024-06-18', 2500.00, 'Efectivo'),              -- Monitor
 (5, 30, 100.00, '2024-06-20', 3000.00, 'Tarjeta de Crédito');    -- Teclado
 
@@ -66,7 +60,7 @@ INSERT INTO Inventario (id_producto, cantidad, fecha_registro, ubicacion) VALUES
 -- Ventas de Julio
 
 INSERT INTO Ventas (id_producto, cantidad_vendida, precio_venta, fecha_venta, total_venta, metodo_pago) VALUES
-(1, 25, 1200.00, '2024-07-05', 30000.00, 'Transferencia Bancaria'), -- Laptop
+(1, 25, 1200.00, '2024-07-05', 30000.00, 'Tarjeta de Crédito'), -- Laptop
 (2, 20, 800.00, '2024-07-08', 16000.00, 'Efectivo'),               -- Smartphone
 (3, 30, 150.00, '2024-07-12', 4500.00, 'Tarjeta de Crédito'),      -- Auriculares
 (4, 15, 250.00, '2024-07-15', 3750.00, 'Efectivo'),                -- Monitor

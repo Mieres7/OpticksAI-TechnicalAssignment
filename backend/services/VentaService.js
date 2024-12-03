@@ -1,5 +1,5 @@
-const { Sequelize } = require("sequelize");
 const Venta = require("../models/Venta");
+const { Sequelize } = require("sequelize");
 
 const VentaService = {
   getAllVentas: async () => {
@@ -113,6 +113,55 @@ const VentaService = {
     } catch (error) {
       throw new Error(
         "Error al obtener las ventas por producto: " + error.message
+      );
+    }
+  },
+
+  getVentasPorMetodoPago: async () => {
+    try {
+      const ventasPorMetodoPago = await Venta.sequelize.query(
+        `
+          SELECT 
+            metodo_pago,
+            COUNT(id_venta) AS cantidad_ventas
+          FROM ventas
+          GROUP BY metodo_pago
+          ORDER BY cantidad_ventas DESC;  -- Puedes ordenar por cantidad si deseas
+        `,
+        {
+          type: Sequelize.QueryTypes.SELECT, // Especificamos que es una consulta de selección
+        }
+      );
+      return ventasPorMetodoPago; // Devuelve el listado de ventas por tipo de pago
+    } catch (error) {
+      throw new Error(
+        "Error al obtener las ventas por método de pago: " + error.message
+      );
+    }
+  },
+
+  getTopProdcutosVendidos: async () => {
+    try {
+      const topProductos = await Venta.sequelize.query(
+        `
+        SELECT 
+          p.id_producto, 
+          p.nombre, 
+          SUM(v.cantidad_vendida) AS cantidad_vendida
+        FROM ventas v
+        INNER JOIN productos p ON p.id_producto = v.id_producto
+        GROUP BY p.id_producto, p.nombre
+        ORDER BY cantidad_vendida DESC
+        LIMIT 3;
+        `,
+        {
+          type: Sequelize.QueryTypes.SELECT,
+        }
+      );
+      return topProductos; // Retorna los 3 productos más vendidos
+    } catch (error) {
+      throw new Error(
+        "Error al obtener los productos más vendidos: " + error.message
       );
     }
   },
