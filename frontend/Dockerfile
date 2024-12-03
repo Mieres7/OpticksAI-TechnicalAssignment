@@ -13,6 +13,9 @@ RUN npm install
 # Copia todo el código de la aplicación al contenedor
 COPY . .
 
+# Construye la aplicación Next.js para producción
+RUN npm run build
+
 # Expone el puerto en el que Next.js corre
 EXPOSE 3000
 
