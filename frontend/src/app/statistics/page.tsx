@@ -1,9 +1,8 @@
-import { HomeIcon } from "@heroicons/react/24/solid";
-
 export default function Statistics() {
   return (
-    <div>
-      <HomeIcon className="size-6 text-blue-500" />
+    <div className="flex flex-row w-auto h-screen">
+      <div className="w-1/2">left</div>
+      <div className="w-1/2">right</div>
     </div>
   );
 }

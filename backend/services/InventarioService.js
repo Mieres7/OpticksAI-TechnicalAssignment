@@ -45,7 +45,6 @@ const InventarioService = {
       if (data.fecha_registro !== undefined)
         updatedData.fecha_registro = data.fecha_registro;
       if (data.ubicacion !== undefined) updatedData.ubicacion = data.ubicacion;
-      if (data.estado !== undefined) updatedData.estado = data.estado;
 
       await inventario.update(updatedData);
       return inventario;

@@ -1,15 +1,10 @@
-// app.js
-const sequelize = require("./config/db"); // Importa la conexión a la base de datos
 const express = require("express");
-const { Pool } = require("pg");
 const cors = require("cors");
 require("dotenv").config(); // Cargar las variables de entorno
 
 const productoRoutes = require("./routes/producto");
 const inventarioRoutes = require("./routes/inventario");
 const ventaRoutes = require("./routes/venta");
-
-// const Producto = require("./models/Producto");
 
 const app = express();
 const port = process.env.PORT || 5000;

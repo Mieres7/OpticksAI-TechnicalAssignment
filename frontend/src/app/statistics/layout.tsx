@@ -1,6 +1,7 @@
 "use client";
 
 import Navbar from "../components/Navbar";
+import Sidebar from "../components/Sidebar";
 
 export default function StatsLayout({
   children,
@@ -8,10 +9,9 @@ export default function StatsLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col p-10 h-screen gap-10">
       <Navbar />
-
-      {/* {children} */}
+      {children}
     </div>
   );
 }

@@ -22,12 +22,21 @@ const ventaController = {
 
   createVenta: async (req, res) => {
     try {
-      const { nombre, descripcion, categoria, precio_unitario } = req.body;
+      const {
+        id_producto,
+        cantidad_vendida,
+        precio_venta,
+        fecha_venta,
+        total_venta,
+        metodo_pago,
+      } = req.body;
       const newVenta = await ventaService.createVenta({
-        nombre,
-        descripcion,
-        categoria,
-        precio_unitario,
+        id_producto,
+        cantidad_vendida,
+        precio_venta,
+        fecha_venta,
+        total_venta,
+        metodo_pago,
       });
       res.status(201).json(newVenta);
     } catch (error) {
@@ -39,13 +48,22 @@ const ventaController = {
     try {
       const { id } = req.params;
 
-      const { nombre, descripcion, categoria, precio_unitario } = req.body;
+      const {
+        id_producto,
+        cantidad_vendida,
+        precio_venta,
+        fecha_venta,
+        total_venta,
+        metodo_pago,
+      } = req.body;
 
       const venta = await ventaService.updateVenta(id, {
-        nombre,
-        descripcion,
-        categoria,
-        precio_unitario,
+        id_producto,
+        cantidad_vendida,
+        precio_venta,
+        fecha_venta,
+        total_venta,
+        metodo_pago,
       });
 
       if (!venta) {

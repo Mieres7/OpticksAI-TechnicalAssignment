@@ -22,12 +22,12 @@ const inventarioController = {
 
   createInventario: async (req, res) => {
     try {
-      const { nombre, descripcion, categoria, precio_unitario } = req.body;
+      const { id_producto, cantidad, fecha_registro, ubicacion } = req.body;
       const newInventario = await inventarioService.createInventario({
-        nombre,
-        descripcion,
-        categoria,
-        precio_unitario,
+        id_producto,
+        cantidad,
+        fecha_registro,
+        ubicacion,
       });
       res.status(201).json(newInventario);
     } catch (error) {
@@ -39,13 +39,13 @@ const inventarioController = {
     try {
       const { id } = req.params;
 
-      const { nombre, descripcion, categoria, precio_unitario } = req.body;
+      const { id_producto, cantidad, fecha_registro, ubicacion } = req.body;
 
       const inventario = await inventarioService.updateInventario(id, {
-        nombre,
-        descripcion,
-        categoria,
-        precio_unitario,
+        id_producto,
+        cantidad,
+        fecha_registro,
+        ubicacion,
       });
 
       if (!inventario) {

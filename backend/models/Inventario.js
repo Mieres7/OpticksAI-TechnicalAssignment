@@ -30,10 +30,6 @@ const Inventario = sequelize.define(
       type: DataTypes.STRING(100),
       allowNull: true,
     },
-    estado: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
   },
   {
     tableName: "inventario",
